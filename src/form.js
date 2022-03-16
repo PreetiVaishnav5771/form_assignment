@@ -1,21 +1,23 @@
 import { useState } from "react";
 
-const form = () => {
-
+const Form = () => {
+   
     const [user, setuser] = useState({
-        name:"",Email:"",address:"",dob:"",gender:"", education:"",password:"",cpassword:""
+        name:"",email:"",address:"",dob:"",gender:"", education:"",password:"",cpassword:""
     });
 
-    let namae,value;
+     const handleChange = (e) => {
+    //  let name,value;
+    //  name = e.target.name;
+    //  value = e.target.value;
 
-    const handleInputs = (e) => {
-     console.log(e);
-     name = e.target.name;
-     value = e.target.value;
-
-     setuser({...user, [name]:vlaue});
+     setuser({
+        ...user,
+        [e.target.name]: e.target.value
+      });
     }
 
+    console.log(user)
 
     return(
         <section className="form">
@@ -28,68 +30,57 @@ const form = () => {
                                 <h5>Name</h5>
                                 <input type="text" name="name" id= "name" autocomplete= "off" 
                                 value={user.name}
-                                onChange={handleInputs}
+                                onChange={handleChange}
                                 placeholder= "Your Name"/>                            
                             </div>
 
                             <div className="form-group">
                                 <h5>Email Address</h5>
-                                <input type="text" name="email" id="email" autocomplete="off" 
+                                <input type="text" name="email" id="email" 
                                 value={user.email}
-                                onChange={handleInputs}
+                                onChange={handleChange}
                                 placeholder="Your Email"/> 
                             </div>
 
                             <div className="form-group">
                                 <h5>Date of Birth</h5>
-                                <input type="text" name="dob" id="dob" autocomplete="off" 
+                                <input type="text" name="dob" id="dob" 
                                 value={user.dob}
-                                onChange={handleInputs}
+                                onChange={handleChange}
                                 placeholder="Your Date of Birth"/> 
                             </div>
 
                             <div className="form-group">
                                 <h5>Gender</h5>
-                                <input type="text" name="gender" id="gender" autocomplete="off" 
-                                value={user.gender}
-                                onChange={handleInputs}
-                                placeholder="select your gender"/> 
-                                <input type="radio" name="gender" value="male" id="gender" autocomplete="off"onchange={e=> setgender(e.target.value)}/> Male
-                                <input type="radio" name="gender" value="female" id="gender" autocomplete="off" onchange={e=> setgender(e.target.value)}/> Female
+                                <input type="radio" name="gender" value="male" id="gender" onChange={handleChange}/> Male
+                                <input type="radio" name="gender" value="female" id="gender" onChange={handleChange}/> Female
                             </div>
 
                             <div className="form-group">
-                                <h5>Level of Education</h5>
-                                <input type="text" name="education" id="education" autocomplete="off" 
-                                value={user.education}
-                                onChange={handleInputs}
-                                placeholder="select your Education"/> 
-                                <select cleasName= "custom-select" onchange= {(e)=>{
-                                      const selectededucation= e.target.value;
-                                      seteducationstate (selectededucation);
-                                    }}>
-                                      <option value="BA">BA</option>
+                                <h5>Level of Education</h5> 
+                                <select className= "custom-select" name="education" value={user.education} onChange= {handleChange}>
+                                      <option value="BA">BA</option>    
                                       <option value="B.Com">B.Com</option>
                                       <option value="BE">BE</option>
                                       <option value="B.Tech">B.Tech</option>
                                       <option value="B.Farma">B.Farma</option>
                                     </select>
-                                    {educationstate}
+                                    
                             </div>
 
                             <div className="form-group">
                                 <h5>Password</h5>
-                                <input type="text" name="password" id="password" autocomplete="off" 
+                                <input type="text" name="password" id="password"  
                                 value={user.password}
-                                onChange={handleInputs}
+                                onChange={handleChange}
                                 placeholder="Your password"/> 
                             </div>
 
                             <div className="form-group">
                                 <h5>Confirm Password</h5>
-                                <input type="text" name="cpassword" id="cpassword" autocomplete="off" 
+                                <input type="text" name="cpassword" id="cpassword"  
                                 value={user.cpassword}
-                                onChange={handleInputs}
+                                onChange={handleChange}
                                 placeholder="confirm your password"/> 
                             </div>
                         </form>
@@ -97,5 +88,8 @@ const form = () => {
                 </div>
             </div>
         </section>
-    )
+    );
 }
+
+
+export default Form;

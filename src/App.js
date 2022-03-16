@@ -1,11 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import form from './form'
+import Form from './form'
 
 const App = () => {
   return (
     <div className="App">
-      <form/>
+
+      <Form/>
+
     </div>
   );
 }
