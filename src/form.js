@@ -1,94 +1,159 @@
 import { useState } from "react";
+import "./App.css";
+import Table from "./table";
 
 const Form = () => {
-   
-    const [user, setuser] = useState({
-        name:"",email:"",address:"",dob:"",gender:"", education:"",password:"",cpassword:""
+  const [user, setuser] = useState({
+    name: "",
+    email: "",
+    dob: "",
+    phone: "",
+    gender: "",
+    education: "",
+    password: "",
+    cpassword: "",
+  });
+
+  const [records, setRecords] = useState([]);
+
+  const handleChange = (e) => {
+    console.log(user);
+    setuser({
+      ...user,
+      [e.target.name]: e.target.value,
     });
+  };
 
-     const handleChange = (e) => {
-    //  let name,value;
-    //  name = e.target.name;
-    //  value = e.target.value;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newRecord = { ...user, id: new Date().getTime().toString() };
+    console.log(newRecord);
+    setRecords([...records, newRecord]);
+    console.log(records);
+  };
 
-     setuser({
-        ...user,
-        [e.target.name]: e.target.value
-      });
-    }
+  // console.log("test");
+  return (
+    // <section className="form">
+    //   <div className="container mt-5">
+    //     <div className="form-content">
+          <div className="container">
+            <div className="title">Input Form</div>
+            <form action="#">
+              <div className="user-details">
+                 <div className="form-group">
+                   <span class="details">Name</span>
+                   <input
+                     type="text"
+                     name="name"
+                     id="name"
+                     value={user.name}
+                     onChange={handleChange}
+                     placeholder="Your Name"
+                   />
+                 </div>
 
-    console.log(user)
+                 <div className="form-group">
+                   <span class="details">Email Address</span>
+                   <input
+                     type="text"
+                     name="email"
+                     id="email"
+                     value={user.email}
+                     onChange={handleChange}
+                     placeholder="Your Email"
+                   />
+                 </div>
 
-    return(
-        <section className="form">
-            <div className="container mt-5">
-                <div className="form-content">
-                    <div className="login-form">
-                        <h2 className="form-title">Input Form</h2>
-                        <form className="register-form" id="register-form">
-                            <div className="form-group">
-                                <h5>Name</h5>
-                                <input type="text" name="name" id= "name" autocomplete= "off" 
-                                value={user.name}
-                                onChange={handleChange}
-                                placeholder= "Your Name"/>                            
-                            </div>
+                 <div className="form-group">
+                   <span class="details">Date of Birth</span>
+                   <input
+                     type="text"
+                     name="dob"
+                     id="dob"
+                     value={user.dob}
+                     onChange={handleChange}
+                     placeholder="Your Date of Birth"
+                   />
+                 </div>
+                 <div className="form-group">
+                   <span class="details">Phone Numbers</span>
+                   <input
+                     type="text"
+                     name="phone"
+                     id="phone"
+                     value={user.phone}
+                     onChange={handleChange}
+                     placeholder="Enter your phone number"
+                   />
+                 </div>
+                 <div className="form-group">
+                   <span class="details">Password</span>
+                   <input
+                     type="password"
+                     name="password"
+                     id="password"
+                     value={user.password}
+                     onChange={handleChange}
+                     placeholder="Your password"
+                   />
+                 </div>
 
-                            <div className="form-group">
-                                <h5>Email Address</h5>
-                                <input type="text" name="email" id="email" 
-                                value={user.email}
-                                onChange={handleChange}
-                                placeholder="Your Email"/> 
-                            </div>
+                 <div className="form-group">
+                   <span class="details">Confirm Password</span>
+                   <input
+                     type="password"               
+                     name="cpassword"
+                     id="cpassword"
+                     value={user.cpassword}
+                     onChange={handleChange}
+                     placeholder="confirm your password"
+                   />
+                 </div>
+                 <div className="form-details">
+                   <span class="details">Gender</span>
+                   <input
+                     type="radio"
+                     name="gender"
+                     value="male"
+                     id="male"
+                     onChange={handleChange}
+                   />{" "}
+                   Male
+                   <input
+                     type="radio"
+                     name="gender"
+                     value="female"
+                     id="female"
+                     onChange={handleChange}
+                   />{" "}
+                   Female
+                 </div>
 
-                            <div className="form-group">
-                                <h5>Date of Birth</h5>
-                                <input type="text" name="dob" id="dob" 
-                                value={user.dob}
-                                onChange={handleChange}
-                                placeholder="Your Date of Birth"/> 
-                            </div>
+                 <div className="form-details">
+                   <span class="details">Level of Education</span>
+                   <select
+                     className="custom-select"
+                     name="education"
+                     value={user.education}
+                     onChange={handleChange}
+                   >  
+                     <option value="BA">BA</option>
+                     <option value="B.Com">B.Com</option>
+                     <option value="BE">BE</option>
+                     <option value="B.Tech">B.Tech</option>
+                     <option value="B.Farma">B.Farma</option>
+                   </select>
+                 </div>
+                 
+                   <button className="button" onClick={handleSubmit}>Add Report</button>
+               </div>
+            </form>
 
-                            <div className="form-group">
-                                <h5>Gender</h5>
-                                <input type="radio" name="gender" value="male" id="gender" onChange={handleChange}/> Male
-                                <input type="radio" name="gender" value="female" id="gender" onChange={handleChange}/> Female
-                            </div>
-
-                            <div className="form-group">
-                                <h5>Level of Education</h5> 
-                                <select className= "custom-select" name="education" value={user.education} onChange= {handleChange}>
-                                      <option value="BA">BA</option>    
-                                      <option value="B.Com">B.Com</option>
-                                      <option value="BE">BE</option>
-                                      <option value="B.Tech">B.Tech</option>
-                                      <option value="B.Farma">B.Farma</option>
-                                    </select>
-                                    
-                            </div>
-
-                            <div className="form-group">
-                                <h5>Password</h5>
-                                <input type="text" name="password" id="password"  
-                                value={user.password}
-                                onChange={handleChange}
-                                placeholder="Your password"/> 
-                            </div>
-
-                            <div className="form-group">
-                                <h5>Confirm Password</h5>
-                                <input type="text" name="cpassword" id="cpassword"  
-                                value={user.cpassword}
-                                onChange={handleChange}
-                                placeholder="confirm your password"/> 
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+            <Table records={records} />
+          </div>
+  
+  );
 }
 
 
